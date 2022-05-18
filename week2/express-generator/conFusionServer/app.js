@@ -4,13 +4,29 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dishRouter = require('./routes/dishRouter');
 var promoRouter = require('./routes/promoRouter');
 var leaderRouter = require('./routes/leaderRouter');
 
+const mongoose = require('mongoose');
 
+const Dishes = require('./models/dishes');
+
+const url = 'mongodb://localhost:27017/conFusion';
+
+const connect = async ()=>{
+  try {
+    const connection = await mongoose.connect(url)
+    console.log('connect to conFusion db');
+  } catch (err) {
+    console.log(err);
+  }
+}  
+
+connect()
 var app = express();
 
 // view engine setup
